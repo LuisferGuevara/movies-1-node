@@ -26,5 +26,15 @@ router.get('/:id', async(req, res)=>{
         
     }
 })
+router.get('/title/:title', async(req, res)=>{
+    try {
+        const title = req.params.title;
+        const allMovies = await Movie.find({title: title});
+        return res.status(200).json(allMovies);
+    } catch (error) {
+        return res.status(500).json(error)
+        
+    }
+})
 
 module.exports = router;
