@@ -36,5 +36,25 @@ router.get('/title/:title', async(req, res)=>{
         
     }
 })
+router.get('/genre/:genre', async(req, res)=>{
+    try {
+        const genre = req.params.genre;
+        const allMovies = await Movie.find({genre: genre});
+        return res.status(200).json(allMovies);
+    } catch (error) {
+        return res.status(500).json(error)
+        
+    }
+})
+router.get('/year/:year', async(req, res)=>{
+    try {
+        const year = req.params.year;
+        const allMovies = await Movie.find({year:{$gte:year}});
+        return res.status(200).json(allMovies);
+    } catch (error) {
+        return res.status(500).json(error)
+        
+    }
+})
 
 module.exports = router;
